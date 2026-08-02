@@ -1,5 +1,6 @@
 package dsa;
 
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 
 public class BinarySearchTree{
 
-    private static class Node {
+    public static class Node {
         int val;
         Node lftcld;
         Node rgtcld;
@@ -96,7 +97,27 @@ public class BinarySearchTree{
         }
     }
 
-    public void bfs(int target){
+    public Node Dfs(int target){
+        return DfsHelp( target ,root) ;
+    }
+
+     Node DfsHelp(int target , Node root){
+         if(root == null) {
+             return null;
+         }
+
+         if(root.val == target){
+             return root;
+         }
+         else if(root.val > target){
+             return DfsHelp(target ,  root.lftcld);
+         }
+         else {
+             return DfsHelp(target, root.rgtcld);
+         }
+     }
+
+     public void bfs(int target){
 
         System.out.println("\n BFS ");
 
@@ -151,5 +172,100 @@ public class BinarySearchTree{
         }
         return false;
     }
+
+    // deleting the target node using inorder successor
+    public void delete(int target){
+        Node targetNode = root;
+        Node targetParentNode = null;
+        while(targetNode != null && targetNode.val != target) {
+            targetParentNode = targetNode;
+            if (target > targetNode.val) {
+                targetNode = targetNode.rgtcld;
+            } else {
+                targetNode = targetNode.lftcld;
+            }
+        }
+        if(targetNode == null){
+            System.out.println("Target Not Found\n");
+            return;
+        }
+        // target with no child
+        if(targetNode.lftcld == null && targetNode.rgtcld == null){
+            System.out.println("target has no children");
+            if(targetParentNode == null){
+                root = null;
+            }
+            else if(targetParentNode.val > target){
+                    targetParentNode.lftcld = null;
+            }
+            else{
+                targetParentNode.rgtcld = null;
+            }
+        }
+        // target with one child
+        else if(targetNode.lftcld != null && targetNode.rgtcld == null){
+            System.out.println("target has one left childs");
+            if(targetParentNode == null){
+                root = targetNode.lftcld;
+            }
+            else if(targetParentNode.val > target){
+                targetParentNode.lftcld = targetNode.lftcld;
+            }
+            else{
+                targetParentNode.rgtcld = targetNode.lftcld;
+            }
+        }
+        else if(targetNode.lftcld == null && targetNode.rgtcld != null){
+            System.out.println("target has one right childs");
+            if(targetParentNode == null){
+                root = targetNode.rgtcld;
+            }
+            else if(targetParentNode.val > target){
+                targetParentNode.lftcld = targetNode.rgtcld;
+            }
+            else {
+                targetParentNode.rgtcld = targetNode.rgtcld;
+            }
+        }
+        // target with both childs
+        else{
+            System.out.println("target has two childs");
+            // finding the inorder successor
+            Node successor = targetNode.rgtcld;
+            Node successorParentNode = targetNode;
+
+            while(successor.lftcld != null){
+                successorParentNode = successor;
+                successor = successor.lftcld ;
+            }
+            // break successor from his parent
+//            if(successorParentNode.val > successor.val){
+//                successorParentNode.lftcld = null;
+//            }
+//            else{
+//                successorParentNode.rgtcld = null;
+//            }
+
+            if(successorParentNode != targetNode){
+                successorParentNode.lftcld = successor.rgtcld;
+                successor.rgtcld = targetNode.rgtcld;
+            }
+            // update children of successor
+            successor.lftcld = targetNode.lftcld;
+
+            // replace target
+            if(targetParentNode == null){
+                root = successor;
+            }
+            else if(targetParentNode.val > target){
+                targetParentNode.lftcld = successor;
+            }
+            else {
+                targetParentNode.rgtcld = successor;
+            }
+
+        }
+    }
+
 }
 

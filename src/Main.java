@@ -8,16 +8,20 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         BinarySearchTree bst = new BinarySearchTree();
         byte choice ;
-        // bst.insert(100);
-        // bst.insert(150);
-        // bst.insert(125);
-        // bst.insert(175);
-        // bst.insert(50);
-        // bst.insert(25);
-        // bst.insert(75);
-        // bst.inorderTraversal();
+        bst.insert(100);
+        bst.insert(150);
+        bst.insert(125);
+        bst.insert(175);
+        bst.insert(50);
+        bst.insert(25);
+        bst.insert(75);
+        bst.inorderTraversal();
         // bst.bfs(175);
         // bst.dfs(175);
+        bst.delete(150);
+
+        bst.inorderTraversal();
+        
 
         do{
 
