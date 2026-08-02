@@ -1,6 +1,13 @@
-import java.util.*;
+package dsa;
 
-class BinarySearchTree{
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.HashMap;
+
+public class BinarySearchTree{
 
     private static class Node {
         int val;
@@ -20,11 +27,11 @@ class BinarySearchTree{
 
     Node root = null ;
 
-    BinarySearchTree(){
+    public BinarySearchTree(){
         root = null;
     }
 
-    void insert(int val) {
+    public void insert(int val) {
         root = insert(val, root);
     }
 
@@ -43,7 +50,7 @@ class BinarySearchTree{
         return root;
     }
 
-    void inorderTraversal(Node root){
+     void inorderTraversal(Node root){
         if(root == null){
             return;
         }
@@ -53,13 +60,13 @@ class BinarySearchTree{
         inorderTraversal(root.rgtcld);
     }
 
-    void inorderTraversal(){
+    public void inorderTraversal(){
         System.out.println("\n InOrder Traverse ");
         inorderTraversal(this.root);
         System.out.println();
     }
 
-    void dfs(int target){
+    public void dfs(int target){
         System.out.println("\n DFS");
 
         List<Integer> list = new ArrayList<>();
@@ -89,7 +96,7 @@ class BinarySearchTree{
         }
     }
 
-    void bfs(int target){
+    public void bfs(int target){
 
         System.out.println("\n BFS ");
 
@@ -143,44 +150,6 @@ class BinarySearchTree{
             }
         }
         return false;
-    }
-}
-
-public class BinaryTreeMain {
-
-    public static  void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        BinarySearchTree bst = new BinarySearchTree();
-        byte choice ;
-        // bst.insert(100);
-        // bst.insert(150);
-        // bst.insert(125);
-        // bst.insert(175);
-        // bst.insert(50);
-        // bst.insert(25);
-        // bst.insert(75);
-        // bst.inorderTraversal();
-        // bst.bfs(175);
-        // bst.dfs(175);
-
-       do{
-
-           choice = 0;
-           System.out.print("\n ()_() \n\n0.Exit\n1.Insert Node \n2.Display Node \n3.Depth First Search\n4.Breath First Search\nur Choice : ");
-           choice = sc.nextByte();
-           switch (choice){
-               case 1 -> bst.insert(sc.nextInt());
-               case 2 -> bst.inorderTraversal();
-               case 3 -> bst.dfs(sc.nextInt());
-               case 4 -> bst.bfs(sc.nextInt());
-               default -> {
-                   System.out.println("\n Bye Bye (^) + (^)");
-                   choice = 0;
-               }
-           }
-       }while(choice != 0 );
-        sc.close();
-        return;
     }
 }
 
