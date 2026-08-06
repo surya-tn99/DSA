@@ -13,7 +13,7 @@ public class BinarySearchTree{
         int val;
         Node lftcld;
         Node rgtcld;
-
+        Node(){};
         Node(int val, Node lftchild, Node rgtchild) {
             this.val = val;
             this.lftcld = lftchild;
@@ -124,13 +124,13 @@ public class BinarySearchTree{
             System.out.println("\n Empty Tree");
             return;
         }
-        if(!BfsHelp(target)){
+        if(!BfsHelp(target , this.root)){
             System.out.println("\n Element not found");
         }
 
     }
 
-    boolean BfsHelp(int target){
+    boolean BfsHelp(int target , Node root){
         if(root == null){
             return false;
         }
@@ -188,6 +188,7 @@ public class BinarySearchTree{
             System.out.println("Target Not Found\n");
             return;
         }
+
         // target with no child
         if(targetNode.lftcld == null && targetNode.rgtcld == null){
             System.out.println("target has no children");

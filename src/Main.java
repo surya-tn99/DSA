@@ -1,12 +1,14 @@
 import java.util.Scanner;
 
+import dsa.AVLTree;
 import dsa.BinarySearchTree;
 
 public class Main {
 
     public static  void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        BinarySearchTree bst = new BinarySearchTree();
+//        BinarySearchTree bst = new BinarySearchTree();
+        AVLTree bst = new AVLTree();
         byte choice ;
 //        bst.insert(100);
 //        bst.insert(150);
@@ -33,7 +35,7 @@ public class Main {
                 case 2 -> bst.inorderTraversal();
                 case 3 -> bst.dfs(sc.nextInt());
                 case 4 -> bst.bfs(sc.nextInt());
-                case 5 -> bst.delete(sc.nextInt());
+//                case 5 -> bst.delete(sc.nextInt());
                 default -> {
                     System.out.println("\n Bye Bye (^) + (^)");
                     choice = 0;
